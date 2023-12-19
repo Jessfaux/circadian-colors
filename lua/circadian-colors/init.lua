@@ -3,6 +3,7 @@ local M = {}
 M.start_hour = 8
 M.end_hour = 20
 
+print("Loading Circadian plugin")
 function M.set_colorscheme()
     local hour = os.date("*t").hour
     if hour >= M.start_hour and hour < M.end_hour then
