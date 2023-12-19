@@ -2,7 +2,7 @@ local M = {}
 
 M.start_hour = 8
 M.end_hour = 20
-
+print("Circadian colors loaded")
 function M.set_colorscheme()
     local hour = os.date("*t").hour
     if hour >= M.start_hour and hour < M.end_hour then
@@ -41,5 +41,6 @@ vim.api.nvim_create_user_command('CircadianSetHours', function(opts)
         print("Please enter two numbers: start hour and end hour.")
     end
 end, { nargs = "*" })
+print("CircadianSetHours command created")
 
 return M
