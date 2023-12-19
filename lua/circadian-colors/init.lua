@@ -8,8 +8,10 @@ function M.set_colorscheme()
     local hour = os.date("*t").hour
     if hour >= M.start_hour and hour < M.end_hour then
         vim.cmd("colorscheme rose-pine-dawn")
+        print("Setting colorscheme to rose-pine-dawn")
     else
         vim.cmd("colorscheme rose-pine")
+        print("Setting colorscheme to rose-pine")
     end
 end
 
