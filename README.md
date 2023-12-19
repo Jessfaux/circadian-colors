@@ -1,4 +1,4 @@
-![Circadian Colors Logo](https://github.com/jessfaux1/circadian-colors/blob/main/images/circadian-colors.png?raw=true)
+![Circadian Colors Logo](https://github.com/jessfaux/circadian-colors/blob/main/circadian-colors.png?raw=true)
 
 # Circadian Colors
 A Neovim plugin that switches colorschemes based on the time of day.
