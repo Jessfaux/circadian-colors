@@ -22,10 +22,14 @@ end
 function M.next_refresh_time()
     local current_hour = os.date("*t").hour
     local next_hour = current_hour + 1
-    if next_hour > M.end_hour then
+    if next_hour >= 24 then
+        next_hour = next_hour - 24
+    end
+    if next_hour > M.end_hour or next_hour < M.start_hour then
         next_hour = M.start_hour
     end
     return next_hour
 end
 
 return M
+
