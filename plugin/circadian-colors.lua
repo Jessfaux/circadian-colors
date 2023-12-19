@@ -12,6 +12,7 @@ local function refreshColorscheme()
         millis_till_next_hour = millis_till_next_hour + 86400000 -- 24 hours in milliseconds
     end
 
+    print("Next refresh in milliseconds:", millis_till_next_hour)
     vim.defer_fn(refreshColorscheme, millis_till_next_hour)
 end
 

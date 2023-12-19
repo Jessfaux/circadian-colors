@@ -16,6 +16,7 @@ end
 function M.set_hours(start_hour, end_hour)
     M.start_hour = start_hour
     M.end_hour = end_hour
+    print("Hours set. Start:", M.start_hour, "End:", M.end_hour)
     M.set_colorscheme()
 end
 
@@ -28,6 +29,7 @@ function M.next_refresh_time()
     if next_hour > M.end_hour or next_hour < M.start_hour then
         next_hour = M.start_hour
     end
+    print("Next refresh hour:", next_hour)
     return next_hour
 end
 
