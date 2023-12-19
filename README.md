@@ -9,7 +9,7 @@ Install with your preferred package manager.
 
 ### With [packer](https://github.com/wbthomason/packer.nvim):
 
-    ```lua
-    use ({'jessfaux/circadian-colors', as = 'circadian-colors' })
-    ```
+```lua
+use ({'jessfaux/circadian-colors', as = 'circadian-colors' })
+```
 
