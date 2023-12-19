@@ -1,21 +1,15 @@
 local circadian = require('circadian-colors')
 
--- Setup the colorscheme on VimEnter and create a timer to check every 60 seconds
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        circadian.set_colorscheme()
+local function refreshColorscheme()
+    circadian.set_colorscheme()
 
-        -- Function to be called periodically
-        local function refreshColorscheme()
-            circadian.set_colorscheme()
-            -- Schedule the function again after 60000ms
-            vim.defer_fn(refreshColorscheme, 60000)
-        end
+    local next_hour = circadian.next_refresh_time()
+    local current_time = os.date("*t")
+    local millis_till_next_hour = ((next_hour - current_time.hour) * 3600 - current_time.min * 60 - current_time.sec) * 1000
 
-        -- Start the periodic refresh
-        refreshColorscheme()
-    end
-})
+    -- Schedule the function again at the start of the next relevant hour
+    vim.defer_fn(refreshColorscheme, millis_till_next_hour)
+end
 
 -- Command for setting the hours
 vim.api.nvim_create_user_command('CircadianSetHours', function(opts)
@@ -25,6 +19,7 @@ vim.api.nvim_create_user_command('CircadianSetHours', function(opts)
         local end_hour = tonumber(args[2])
         if start_hour and end_hour then
             circadian.set_hours(start_hour, end_hour)
+            refreshColorscheme()
         else
             print("Invalid hours. Please enter numeric values.")
         end

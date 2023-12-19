@@ -19,5 +19,13 @@ function M.set_hours(start_hour, end_hour)
     M.set_colorscheme()
 end
 
-return M
+function M.next_refresh_time()
+    local current_hour = os.date("*t").hour
+    local next_hour = current_hour + 1
+    if next_hour > M.end_hour then
+        next_hour = M.start_hour
+    end
+    return next_hour
+end
 
+return M
