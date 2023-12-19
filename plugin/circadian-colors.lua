@@ -3,16 +3,24 @@ local circadian = require('circadian-colors')
 local function refreshColorscheme()
     circadian.set_colorscheme()
 
-    local next_hour = circadian.next_refresh_time()
     local current_time = os.date("*t")
-    local millis_till_next_hour = ((next_hour - current_time.hour) * 3600 - current_time.min * 60 - current_time.sec) *
-    1000
+    local current_hour = current_time.hour
+    local next_hour = circadian.next_refresh_time()
+    local millis_till_next_hour
 
-    if millis_till_next_hour < 0 then
-        millis_till_next_hour = millis_till_next_hour + 86400000 -- 24 hours in milliseconds
+    if current_hour >= circadian.start_hour and current_hour < circadian.end_hour then
+        -- Schedule for end_hour if we are currently in the day mode
+        millis_till_next_hour = ((circadian.end_hour - current_hour) * 3600 - current_time.min * 60 - current_time.sec) *
+        1000
+    else
+        -- Schedule for start_hour if we are currently in the night mode
+        millis_till_next_hour = ((next_hour - current_hour) * 3600 - current_time.min * 60 - current_time.sec) * 1000
+        if millis_till_next_hour < 0 then
+            millis_till_next_hour = millis_till_next_hour + 86400000 -- Add 24 hours if the time is for the next day
+        end
     end
 
-    print("Next refresh in milliseconds:", millis_till_next_hour)
+    print("Next refresh in milliseconds:", millis_till_next_hour) -- Debugging output
     vim.defer_fn(refreshColorscheme, millis_till_next_hour)
 end
 
@@ -38,4 +46,3 @@ vim.api.nvim_create_user_command('CircadianSetHours', function(opts)
         print("Please enter two numbers: start hour and end hour.")
     end
 end, { nargs = "*" })
-
