@@ -45,3 +45,23 @@ vim.api.nvim_create_user_command('CircadianSetHours', function(opts)
         print("Please enter two numbers: start hour and end hour.")
     end
 end, { nargs = "*" })
+
+vim.api.nvim_create_user_command('CircadianSetLightTheme', function(opts)
+    local args = vim.split(opts.args, " ")
+    if #args == 1 then
+        circadian.set_light_theme(args[1])
+        refreshColorscheme()
+    else
+        print("Please enter one theme name.")
+    end
+end, { nargs = "*" })
+
+vim.api.nvim_create_user_command('CircadianSetDarkTheme', function(opts)
+    local args = vim.split(opts.args, " ")
+    if #args == 1 then
+        circadian.set_dark_theme(args[1])
+        refreshColorscheme()
+    else
+        print("Please enter one theme name.")
+    end
+end, { nargs = "*" })

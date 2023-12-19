@@ -2,19 +2,31 @@ local M = {}
 
 M.start_hour = 8
 M.end_hour = 20
+M.light_theme = "rose-pine-dawn"
+M.dark_theme = "rose-pine-moon"
 
 function M.set_colorscheme()
     local hour = os.date("*t").hour
     if hour >= M.start_hour and hour < M.end_hour then
-        vim.cmd("colorscheme rose-pine-dawn")
+        vim.cmd("colorscheme " .. M.light_theme)
     else
-        vim.cmd("colorscheme rose-pine-moon")
+        vim.cmd("colorscheme " .. M.dark_theme)
     end
 end
 
 function M.set_hours(start_hour, end_hour)
     M.start_hour = start_hour
     M.end_hour = end_hour
+    M.set_colorscheme()
+end
+
+function M.set_light_theme(theme)
+    M.light_theme = theme
+    M.set_colorscheme()
+end
+
+function M.set_dark_theme(theme)
+    M.dark_theme = theme
     M.set_colorscheme()
 end
 
