@@ -10,8 +10,8 @@ function M.set_colorscheme()
         vim.cmd("colorscheme rose-pine-dawn")
         print("Setting colorscheme to rose-pine-dawn")
     else
-        vim.cmd("colorscheme rose-pine")
-        print("Setting colorscheme to rose-pine")
+        vim.cmd("colorscheme rose-pine-moon")
+        print("Setting colorscheme to rose-pine-moon")
     end
 end
 
